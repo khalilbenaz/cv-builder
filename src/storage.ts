@@ -6,14 +6,16 @@ const STORAGE_KEY = "cv_builder_data_v1";
 const TEMPLATE_KEY = "cv_builder_template_v1";
 const SETTINGS_KEY = "cv_builder_settings_v1";
 
+export type IconStyle = "solid" | "outline" | "emoji" | "none";
+
 export interface CVSettings {
   /** Couleur d'accent hex personnalisée ; undefined = couleur du thème */
   accent?: string;
-  /** Affiche les icônes de contact dans le CV */
-  showIcons: boolean;
+  /** Style des icônes de contact dans le CV */
+  iconStyle: IconStyle;
 }
 
-export const defaultSettings: CVSettings = { showIcons: true };
+export const defaultSettings: CVSettings = { iconStyle: "solid" };
 
 export function loadCV(): CVData {
   try {
@@ -56,7 +58,12 @@ export function loadSettings(): CVSettings {
   try {
     const raw = localStorage.getItem(SETTINGS_KEY);
     if (!raw) return defaultSettings;
-    return { ...defaultSettings, ...(JSON.parse(raw) as Partial<CVSettings>) };
+    const parsed = JSON.parse(raw) as Partial<CVSettings> & { showIcons?: boolean };
+    // Migration : ancien booléen showIcons → iconStyle
+    if (parsed.iconStyle === undefined && parsed.showIcons !== undefined) {
+      parsed.iconStyle = parsed.showIcons ? "solid" : "none";
+    }
+    return { ...defaultSettings, ...parsed };
   } catch {
     return defaultSettings;
   }

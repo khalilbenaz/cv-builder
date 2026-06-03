@@ -2,6 +2,7 @@ import React from "react";
 import type { CVData } from "../types";
 import type { CVSettings } from "../storage";
 import { getTemplate, type TemplateId } from "../templates";
+import { IconStyleContext } from "../templates/icons";
 import { accentVars } from "../utils";
 
 interface Props {
@@ -19,10 +20,12 @@ export default function CVPreview({ data, template, settings, forPrint }: Props)
 
   return (
     <div
-      className={`${forPrint ? "bg-white" : "bg-white shadow-lg rounded-xl overflow-hidden"}${settings.showIcons ? "" : " cv-noicons"}`}
+      className={forPrint ? "bg-white" : "bg-white shadow-lg rounded-xl overflow-hidden"}
       style={vars as React.CSSProperties}
     >
-      <Template data={data} />
+      <IconStyleContext.Provider value={settings.iconStyle}>
+        <Template data={data} />
+      </IconStyleContext.Provider>
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { TEMPLATES, type TemplateId } from "../templates";
-import type { CVSettings } from "../storage";
+import React, { useState } from "react";
+import { TEMPLATES, getTemplate, type TemplateId } from "../templates";
+import type { CVSettings, IconStyle } from "../storage";
 
 interface Props {
   template: TemplateId;
@@ -25,12 +25,38 @@ const ACCENT_PRESETS = [
 ];
 
 export default function TemplatePicker({ template, onTemplateChange, settings, onSettingsChange }: Props) {
+  const [expanded, setExpanded] = useState(false);
+  const current = getTemplate(template);
+
   return (
     <div className="space-y-3">
-      {/* Liste des modèles */}
+      {/* Liste des modèles (repliable) */}
       <div>
-        <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-1.5">Modèle</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          aria-expanded={expanded}
+          className="w-full flex items-center justify-between gap-2 group"
+        >
+          <span className="flex items-center gap-2">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">Modèle</span>
+            <span className="flex items-center gap-1.5 rounded-md bg-indigo-50 border border-indigo-200 px-2 py-0.5 text-xs font-medium text-indigo-700">
+              <span
+                className="w-2 h-2 rounded-full shrink-0 border border-black/10"
+                style={{ backgroundColor: current.accent }}
+              />
+              {current.label}
+            </span>
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className={`w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-transform ${expanded ? "rotate-180" : ""}`}
+          >
+            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+        <div className={`grid grid-cols-2 sm:grid-cols-3 gap-1.5 mt-1.5 ${expanded ? "" : "hidden"}`}>
           {TEMPLATES.map((t) => {
             const active = t.id === template;
             return (
@@ -109,20 +135,29 @@ export default function TemplatePicker({ template, onTemplateChange, settings, o
 
         <div>
           <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide mb-1.5">Icônes</p>
-          <button
-            onClick={() => onSettingsChange({ ...settings, showIcons: !settings.showIcons })}
-            role="switch"
-            aria-checked={settings.showIcons}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-              settings.showIcons ? "bg-indigo-600" : "bg-slate-300"
-            }`}
-          >
-            <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition ${
-                settings.showIcons ? "translate-x-6" : "translate-x-1"
-              }`}
-            />
-          </button>
+          <div className="inline-flex rounded-md border border-slate-200 bg-white overflow-hidden">
+            {(
+              [
+                { id: "solid", label: "Plein" },
+                { id: "outline", label: "Contour" },
+                { id: "emoji", label: "Emoji" },
+                { id: "none", label: "Aucune" },
+              ] as { id: IconStyle; label: string }[]
+            ).map((opt, i) => (
+              <button
+                key={opt.id}
+                onClick={() => onSettingsChange({ ...settings, iconStyle: opt.id })}
+                aria-pressed={settings.iconStyle === opt.id}
+                className={`px-2.5 py-1 text-[11px] font-medium transition ${i > 0 ? "border-l border-slate-200" : ""} ${
+                  settings.iconStyle === opt.id
+                    ? "bg-indigo-600 text-white"
+                    : "text-slate-500 hover:bg-slate-50"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
