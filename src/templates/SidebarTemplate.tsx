@@ -30,6 +30,13 @@ export default function SidebarTemplate({ data }: Props) {
     <div className="grid grid-cols-3" style={{ fontFamily: "'Inter', system-ui, sans-serif", minHeight: "842px" }}>
       {/* Sidebar sombre */}
       <div className="col-span-1 bg-slate-800 text-slate-100 px-5 py-8">
+        {personal.photo && (
+          <img
+            src={personal.photo}
+            alt=""
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-teal-400/40"
+          />
+        )}
         <h1 className="text-xl font-bold leading-tight text-white">
           {personal.nom || "Votre Nom"}
         </h1>

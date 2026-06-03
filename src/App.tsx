@@ -134,7 +134,7 @@ export default function App() {
         </div>
 
         {/* Aperçu */}
-        <div className="sticky top-20">
+        <div className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:overscroll-contain">
           <div className="bg-slate-50 border border-slate-100 rounded-t-2xl px-5 py-3 flex items-center justify-between gap-3 flex-wrap shadow-sm">
             <h2 className="text-sm font-semibold text-slate-700 shrink-0">Aperçu du CV</h2>
             <TemplatePicker value={template} onChange={handleTemplateChange} />

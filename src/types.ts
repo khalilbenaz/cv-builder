@@ -5,6 +5,8 @@ export interface PersonalInfo {
   telephone: string;
   ville: string;
   site: string;
+  /** Photo de profil encodée en data URL (optionnelle) */
+  photo?: string;
 }
 
 export interface Experience {

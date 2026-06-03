@@ -4,6 +4,7 @@ import { uid } from "../utils";
 import FormSection from "./FormSection";
 import InputField from "./InputField";
 import TextareaField from "./TextareaField";
+import PhotoField from "./PhotoField";
 
 interface Props {
   data: CVData;
@@ -80,6 +81,10 @@ export default function FormPanel({ data, onChange }: Props) {
     <div className="p-5 overflow-y-auto h-full">
       {/* Infos personnelles */}
       <FormSection title="Informations personnelles">
+        <PhotoField
+          value={data.personal.photo}
+          onChange={(photo) => onChange({ ...data, personal: { ...data.personal, photo } })}
+        />
         <InputField label="Nom complet" value={data.personal.nom} onChange={(v) => setPersonal("nom", v)} placeholder="Prénom Nom" />
         <InputField label="Titre / Poste visé" value={data.personal.titre} onChange={(v) => setPersonal("titre", v)} placeholder="Développeur Full-Stack" />
         <div className="grid grid-cols-2 gap-2">

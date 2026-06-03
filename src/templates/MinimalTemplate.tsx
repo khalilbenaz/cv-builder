@@ -22,7 +22,8 @@ export default function MinimalTemplate({ data }: Props) {
       style={{ fontFamily: "'Inter', system-ui, sans-serif", minHeight: "842px" }}
     >
       {/* En-tête */}
-      <div className="mb-8">
+      <div className="mb-8 flex items-start justify-between gap-6">
+        <div>
         <h1 className="text-[28px] font-light tracking-tight text-gray-900 leading-tight">
           {personal.nom || "Votre Nom"}
         </h1>
@@ -34,6 +35,14 @@ export default function MinimalTemplate({ data }: Props) {
             .filter(Boolean)
             .join("   ·   ")}
         </p>
+        </div>
+        {personal.photo && (
+          <img
+            src={personal.photo}
+            alt=""
+            className="w-20 h-20 rounded-full object-cover grayscale shrink-0"
+          />
+        )}
       </div>
 
       {/* Profil */}

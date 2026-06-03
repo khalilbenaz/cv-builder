@@ -21,7 +21,15 @@ export default function ModernTemplate({ data }: Props) {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", minHeight: "842px" }}>
       {/* En-tête */}
-      <div className="bg-gradient-to-r from-indigo-700 to-indigo-500 px-8 py-7 text-white">
+      <div className="bg-gradient-to-r from-indigo-700 to-indigo-500 px-8 py-7 text-white flex items-center gap-6">
+        {personal.photo && (
+          <img
+            src={personal.photo}
+            alt=""
+            className="w-20 h-20 rounded-full object-cover ring-4 ring-white/30 shrink-0"
+          />
+        )}
+        <div className="flex-1">
         <h1 className="text-2xl font-bold tracking-tight leading-tight">
           {personal.nom || "Votre Nom"}
         </h1>
@@ -53,6 +61,7 @@ export default function ModernTemplate({ data }: Props) {
               {personal.site}
             </span>
           )}
+        </div>
         </div>
       </div>
 
