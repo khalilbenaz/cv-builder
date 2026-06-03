@@ -10,20 +10,10 @@ import TemplatePicker from "./components/TemplatePicker";
 /* Injecte les styles d'impression une seule fois dans le <head> */
 const PRINT_STYLE = `
 @media print {
-  body * { visibility: hidden !important; }
-  #cv-preview, #cv-preview * { visibility: visible !important; }
-  #cv-preview {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
-  }
   @page { margin: 0; size: A4 portrait; }
+  html, body { margin: 0 !important; padding: 0 !important; background: white !important; }
+  #cv-print { display: block !important; }
+  #cv-print * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 `;
 
@@ -78,7 +68,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-indigo-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-indigo-50 print:bg-none print:min-h-0 flex flex-col">
       {/* Barre de navigation */}
       <header className="print:hidden bg-white/80 backdrop-blur border-b border-slate-200 sticky top-0 z-30 shadow-sm">
         <div className="max-w-screen-2xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
@@ -145,8 +135,10 @@ export default function App() {
         </div>
       </main>
 
-      {/* Zone d'impression : affiche le CV en pleine page via CSS @media print (voir PRINT_STYLE) */}
-      {/* Le #cv-preview dans le main est ciblé directement par @media print */}
+      {/* Zone d'impression : copie dédiée du CV, visible uniquement en @media print */}
+      <div id="cv-print" className="hidden">
+        <CVPreview data={data} template={template} forPrint />
+      </div>
     </div>
   );
 }

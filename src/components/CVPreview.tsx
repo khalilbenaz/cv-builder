@@ -5,13 +5,15 @@ import { getTemplate, type TemplateId } from "../templates";
 interface Props {
   data: CVData;
   template: TemplateId;
+  /** Variante impression : pas d'ombre ni d'arrondis */
+  forPrint?: boolean;
 }
 
-export default function CVPreview({ data, template }: Props) {
+export default function CVPreview({ data, template, forPrint }: Props) {
   const Template = getTemplate(template).component;
 
   return (
-    <div id="cv-preview" className="bg-white shadow-lg rounded-xl overflow-hidden">
+    <div className={forPrint ? "bg-white" : "bg-white shadow-lg rounded-xl overflow-hidden"}>
       <Template data={data} />
     </div>
   );
