@@ -8,7 +8,7 @@ interface Props {
 
 function SidebarTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-300 border-b border-slate-600 pb-1.5 mb-3">
+    <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[color:var(--ac-light)] border-b border-slate-600 pb-1.5 mb-3">
       {children}
     </h2>
   );
@@ -18,7 +18,7 @@ function MainTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2 mb-3">
       <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-800">{children}</h2>
-      <div className="flex-1 h-px bg-teal-500/40" />
+      <div className="flex-1 h-px bg-[color:var(--ac-border)]" />
     </div>
   );
 }
@@ -34,14 +34,14 @@ export default function SidebarTemplate({ data }: Props) {
           <img
             src={personal.photo}
             alt=""
-            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-teal-400/40"
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 ring-4 ring-[color:var(--ac-light)]"
           />
         )}
         <h1 className="text-xl font-bold leading-tight text-white">
           {personal.nom || "Votre Nom"}
         </h1>
         {personal.titre && (
-          <p className="text-teal-300 text-[11px] font-medium mt-1 mb-5">{personal.titre}</p>
+          <p className="text-[color:var(--ac-light)] text-[11px] font-medium mt-1 mb-5">{personal.titre}</p>
         )}
 
         {/* Contact */}
@@ -81,7 +81,7 @@ export default function SidebarTemplate({ data }: Props) {
                 .filter((c) => c.label.trim())
                 .map((c) => (
                   <li key={c.id} className="text-[10.5px] text-slate-200 flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-teal-400 shrink-0" />
+                    <span className="w-1 h-1 rounded-full bg-[color:var(--ac-light)] shrink-0" />
                     {c.label}
                   </li>
                 ))}
@@ -97,7 +97,7 @@ export default function SidebarTemplate({ data }: Props) {
               {langues.map((l) => (
                 <li key={l.id}>
                   <p className="text-[10.5px] font-semibold text-slate-200">{l.langue || "—"}</p>
-                  <p className="text-[9.5px] text-teal-300">{l.niveau || "—"}</p>
+                  <p className="text-[9.5px] text-[color:var(--ac-light)]">{l.niveau || "—"}</p>
                 </li>
               ))}
             </ul>
@@ -128,7 +128,7 @@ export default function SidebarTemplate({ data }: Props) {
                         <p className="text-[12px] font-bold text-slate-800 leading-tight">{exp.poste}</p>
                       )}
                       {exp.entreprise && (
-                        <p className="text-[11px] text-teal-600 font-semibold">{exp.entreprise}</p>
+                        <p className="text-[11px] text-[color:var(--ac)] font-semibold">{exp.entreprise}</p>
                       )}
                     </div>
                     {exp.periode && (
@@ -157,7 +157,7 @@ export default function SidebarTemplate({ data }: Props) {
                     {f.diplome && (
                       <p className="text-[11.5px] font-bold text-slate-800 leading-snug">{f.diplome}</p>
                     )}
-                    {f.ecole && <p className="text-[11px] text-teal-600 font-medium">{f.ecole}</p>}
+                    {f.ecole && <p className="text-[11px] text-[color:var(--ac)] font-medium">{f.ecole}</p>}
                   </div>
                   {f.periode && (
                     <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap bg-slate-100 px-2 py-0.5 rounded">

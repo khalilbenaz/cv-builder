@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { CVData } from "./types";
-import { loadCV, saveCV, loadTemplate, saveTemplate } from "./storage";
+import { loadCV, saveCV, loadTemplate, saveTemplate, loadSettings, saveSettings, type CVSettings } from "./storage";
 import { defaultData } from "./defaultData";
 import type { TemplateId } from "./templates";
 import FormPanel from "./components/FormPanel";
@@ -36,6 +36,7 @@ export default function App() {
 
   const [data, setData] = useState<CVData>(() => loadCV());
   const [template, setTemplate] = useState<TemplateId>(() => loadTemplate());
+  const [settings, setSettings] = useState<CVSettings>(() => loadSettings());
   const [saved, setSaved] = useState(false);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -55,6 +56,11 @@ export default function App() {
   function handleTemplateChange(id: TemplateId) {
     setTemplate(id);
     saveTemplate(id);
+  }
+
+  function handleSettingsChange(s: CVSettings) {
+    setSettings(s);
+    saveSettings(s);
   }
 
   function handleReset() {
@@ -125,19 +131,24 @@ export default function App() {
 
         {/* Aperçu */}
         <div className="lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:overscroll-contain">
-          <div className="bg-slate-50 border border-slate-100 rounded-t-2xl px-5 py-3 flex items-center justify-between gap-3 flex-wrap shadow-sm">
-            <h2 className="text-sm font-semibold text-slate-700 shrink-0">Aperçu du CV</h2>
-            <TemplatePicker value={template} onChange={handleTemplateChange} />
+          <div className="bg-slate-50 border border-slate-100 rounded-t-2xl px-5 py-3 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-700 mb-2.5">Aperçu du CV</h2>
+            <TemplatePicker
+              template={template}
+              onTemplateChange={handleTemplateChange}
+              settings={settings}
+              onSettingsChange={handleSettingsChange}
+            />
           </div>
           <div className="overflow-hidden rounded-b-2xl border border-t-0 border-slate-100 shadow-lg p-4 bg-white">
-            <CVPreview data={data} template={template} />
+            <CVPreview data={data} template={template} settings={settings} />
           </div>
         </div>
       </main>
 
       {/* Zone d'impression : copie dédiée du CV, visible uniquement en @media print */}
       <div id="cv-print" className="hidden">
-        <CVPreview data={data} template={template} forPrint />
+        <CVPreview data={data} template={template} settings={settings} forPrint />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ interface Props {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[11px] font-bold text-emerald-600 mb-3 font-mono">
+    <h2 className="text-[11px] font-bold text-[color:var(--ac)] mb-3 font-mono">
       <span className="text-gray-400">## </span>
       {children}
     </h2>
@@ -34,11 +34,11 @@ export default function TechTemplate({ data }: Props) {
             <img
               src={personal.photo}
               alt=""
-              className="w-16 h-16 rounded-lg object-cover border-2 border-emerald-500/50 shrink-0"
+              className="w-16 h-16 rounded-lg object-cover border-2 border-[color:var(--ac-border)] shrink-0"
             />
           )}
           <div className="min-w-0">
-        <h1 className="text-xl font-bold text-emerald-400">
+        <h1 className="text-xl font-bold text-[color:var(--ac-light)]">
           <span className="text-gray-500">$ </span>
           {personal.nom || "Votre Nom"}
         </h1>
@@ -53,7 +53,7 @@ export default function TechTemplate({ data }: Props) {
             .filter(Boolean)
             .map((v, i) => (
               <span key={i}>
-                <span className="text-emerald-500">--</span>
+                <span className="text-[color:var(--ac)]">--</span>
                 {v}{"  "}
               </span>
             ))}
@@ -95,11 +95,11 @@ export default function TechTemplate({ data }: Props) {
           <SectionTitle>expériences</SectionTitle>
           <ul className="space-y-4">
             {experiences.map((exp) => (
-              <li key={exp.id} className="border-l-2 border-emerald-500/40 pl-4">
+              <li key={exp.id} className="border-l-2 border-[color:var(--ac-border)] pl-4">
                 <div className="flex items-baseline justify-between flex-wrap gap-1">
                   <p className="text-[11.5px] font-bold text-gray-900">{exp.poste}</p>
                   {exp.periode && (
-                    <span className="text-[9.5px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded whitespace-nowrap">
+                    <span className="text-[9.5px] text-[color:var(--ac-dark)] bg-[color:var(--ac-bg)] px-1.5 py-0.5 rounded whitespace-nowrap">
                       {exp.periode}
                     </span>
                   )}
@@ -127,7 +127,7 @@ export default function TechTemplate({ data }: Props) {
                   <p className="text-[10.5px] font-bold text-gray-900">{f.diplome}</p>
                   <p className="text-[10px] text-gray-500">
                     {f.ecole}
-                    {f.periode && <span className="text-emerald-700"> · {f.periode}</span>}
+                    {f.periode && <span className="text-[color:var(--ac-dark)]"> · {f.periode}</span>}
                   </p>
                 </li>
               ))}
@@ -144,7 +144,7 @@ export default function TechTemplate({ data }: Props) {
                 <li key={l.id} className="text-[10.5px] text-gray-700">
                   <span className="font-bold">{l.langue || "—"}</span>
                   <span className="text-gray-400"> : </span>
-                  <span className="text-emerald-700">{l.niveau || "—"}</span>
+                  <span className="text-[color:var(--ac-dark)]">{l.niveau || "—"}</span>
                 </li>
               ))}
             </ul>

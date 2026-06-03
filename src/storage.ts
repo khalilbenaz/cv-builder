@@ -4,6 +4,16 @@ import { DEFAULT_TEMPLATE, TEMPLATES, type TemplateId } from "./templates";
 
 const STORAGE_KEY = "cv_builder_data_v1";
 const TEMPLATE_KEY = "cv_builder_template_v1";
+const SETTINGS_KEY = "cv_builder_settings_v1";
+
+export interface CVSettings {
+  /** Couleur d'accent hex personnalisée ; undefined = couleur du thème */
+  accent?: string;
+  /** Affiche les icônes de contact dans le CV */
+  showIcons: boolean;
+}
+
+export const defaultSettings: CVSettings = { showIcons: true };
 
 export function loadCV(): CVData {
   try {
@@ -37,6 +47,24 @@ export function loadTemplate(): TemplateId {
 export function saveTemplate(id: TemplateId): void {
   try {
     localStorage.setItem(TEMPLATE_KEY, id);
+  } catch {
+    // silently ignore storage quota errors
+  }
+}
+
+export function loadSettings(): CVSettings {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return defaultSettings;
+    return { ...defaultSettings, ...(JSON.parse(raw) as Partial<CVSettings>) };
+  } catch {
+    return defaultSettings;
+  }
+}
+
+export function saveSettings(settings: CVSettings): void {
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   } catch {
     // silently ignore storage quota errors
   }

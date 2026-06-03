@@ -8,8 +8,8 @@ interface Props {
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-3 mb-3">
-      <div className="w-6 h-px bg-amber-600" />
-      <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-700">{children}</h2>
+      <div className="w-6 h-px bg-[color:var(--ac)]" />
+      <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[color:var(--ac-dark)]">{children}</h2>
     </div>
   );
 }
@@ -28,15 +28,15 @@ export default function ElegantTemplate({ data }: Props) {
           <img
             src={personal.photo}
             alt=""
-            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-amber-600 p-0.5"
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-[color:var(--ac)] p-0.5"
           />
         )}
         <h1 className="text-[30px] tracking-[0.08em] text-gray-900 font-normal uppercase">
           {personal.nom || "Votre Nom"}
         </h1>
-        <div className="w-16 h-px bg-amber-600 mx-auto my-3" />
+        <div className="w-16 h-px bg-[color:var(--ac)] mx-auto my-3" />
         {personal.titre && (
-          <p className="text-[12px] text-amber-800 tracking-[0.2em] uppercase">{personal.titre}</p>
+          <p className="text-[12px] text-[color:var(--ac-dark)] tracking-[0.2em] uppercase">{personal.titre}</p>
         )}
         <p className="mt-3 text-[10.5px] text-gray-500 italic">
           {[personal.email, personal.telephone, personal.ville, personal.site]
@@ -63,7 +63,7 @@ export default function ElegantTemplate({ data }: Props) {
                 <div className="flex items-baseline justify-between flex-wrap gap-1">
                   <p className="text-[12.5px] font-semibold text-gray-900">{exp.poste}</p>
                   {exp.periode && (
-                    <span className="text-[10px] text-amber-700 italic whitespace-nowrap">{exp.periode}</span>
+                    <span className="text-[10px] text-[color:var(--ac-dark)] italic whitespace-nowrap">{exp.periode}</span>
                   )}
                 </div>
                 {exp.entreprise && (
@@ -90,7 +90,7 @@ export default function ElegantTemplate({ data }: Props) {
                   {f.ecole && <span className="text-gray-500"> — {f.ecole}</span>}
                 </p>
                 {f.periode && (
-                  <span className="text-[10px] text-amber-700 italic whitespace-nowrap">{f.periode}</span>
+                  <span className="text-[10px] text-[color:var(--ac-dark)] italic whitespace-nowrap">{f.periode}</span>
                 )}
               </li>
             ))}

@@ -18,3 +18,8 @@ body {
 * {
   box-sizing: border-box;
 }
+
+/* Masque les icônes de contact du CV quand l'option est désactivée */
+.cv-noicons .cv-icon {
+  display: none;
+}

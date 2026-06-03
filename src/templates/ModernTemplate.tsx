@@ -9,8 +9,8 @@ interface Props {
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2 mb-3">
-      <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] text-indigo-700">{children}</h2>
-      <div className="flex-1 h-px bg-indigo-200" />
+      <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] text-[color:var(--ac-dark)]">{children}</h2>
+      <div className="flex-1 h-px bg-[color:var(--ac-border)]" />
     </div>
   );
 }
@@ -21,7 +21,7 @@ export default function ModernTemplate({ data }: Props) {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", minHeight: "842px" }}>
       {/* En-tête */}
-      <div className="bg-gradient-to-r from-indigo-700 to-indigo-500 px-8 py-7 text-white flex items-center gap-6">
+      <div className="bg-[image:linear-gradient(to_right,var(--ac-dark),var(--ac))] px-8 py-7 text-white flex items-center gap-6">
         {personal.photo && (
           <img
             src={personal.photo}
@@ -34,29 +34,29 @@ export default function ModernTemplate({ data }: Props) {
           {personal.nom || "Votre Nom"}
         </h1>
         {personal.titre && (
-          <p className="text-indigo-200 text-sm font-medium mt-0.5">{personal.titre}</p>
+          <p className="text-white/75 text-sm font-medium mt-0.5">{personal.titre}</p>
         )}
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">
           {personal.email && (
-            <span className="flex items-center gap-1.5 text-xs text-indigo-100">
+            <span className="flex items-center gap-1.5 text-xs text-white/85">
               <IconEmail />
               {personal.email}
             </span>
           )}
           {personal.telephone && (
-            <span className="flex items-center gap-1.5 text-xs text-indigo-100">
+            <span className="flex items-center gap-1.5 text-xs text-white/85">
               <IconPhone />
               {personal.telephone}
             </span>
           )}
           {personal.ville && (
-            <span className="flex items-center gap-1.5 text-xs text-indigo-100">
+            <span className="flex items-center gap-1.5 text-xs text-white/85">
               <IconPin />
               {personal.ville}
             </span>
           )}
           {personal.site && (
-            <span className="flex items-center gap-1.5 text-xs text-indigo-100">
+            <span className="flex items-center gap-1.5 text-xs text-white/85">
               <IconLink />
               {personal.site}
             </span>
@@ -79,7 +79,7 @@ export default function ModernTemplate({ data }: Props) {
                   .map((c) => (
                     <span
                       key={c.id}
-                      className="inline-block rounded-full bg-indigo-100 text-indigo-700 text-[10px] font-semibold px-2.5 py-0.5 border border-indigo-200"
+                      className="inline-block rounded-full bg-[color:var(--ac-bg)] text-[color:var(--ac-dark)] text-[10px] font-semibold px-2.5 py-0.5 border border-[color:var(--ac-border)]"
                     >
                       {c.label}
                     </span>
@@ -96,7 +96,7 @@ export default function ModernTemplate({ data }: Props) {
                 {langues.map((l) => (
                   <li key={l.id} className="flex items-center justify-between">
                     <span className="text-[11px] font-semibold text-gray-700">{l.langue || "—"}</span>
-                    <span className="text-[10px] text-indigo-600 font-medium bg-indigo-50 rounded px-1.5 py-0.5 border border-indigo-100">
+                    <span className="text-[10px] text-[color:var(--ac)] font-medium bg-[color:var(--ac-bg)] rounded px-1.5 py-0.5 border border-[color:var(--ac-border)]">
                       {l.niveau || "—"}
                     </span>
                   </li>
@@ -116,7 +116,7 @@ export default function ModernTemplate({ data }: Props) {
                       <p className="text-[11px] font-bold text-gray-800 leading-snug">{f.diplome}</p>
                     )}
                     {f.ecole && (
-                      <p className="text-[11px] text-indigo-600 font-medium">{f.ecole}</p>
+                      <p className="text-[11px] text-[color:var(--ac)] font-medium">{f.ecole}</p>
                     )}
                     {f.periode && (
                       <p className="text-[10px] text-gray-400 mt-0.5">{f.periode}</p>
@@ -144,15 +144,15 @@ export default function ModernTemplate({ data }: Props) {
               <SectionTitle>Expériences professionnelles</SectionTitle>
               <ul className="space-y-5">
                 {experiences.map((exp) => (
-                  <li key={exp.id} className="relative pl-4 border-l-2 border-indigo-200">
-                    <div className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-indigo-500" />
+                  <li key={exp.id} className="relative pl-4 border-l-2 border-[color:var(--ac-border)]">
+                    <div className="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-[color:var(--ac-bg)]0" />
                     <div className="flex items-start justify-between flex-wrap gap-1">
                       <div>
                         {exp.poste && (
                           <p className="text-[12px] font-bold text-gray-800 leading-tight">{exp.poste}</p>
                         )}
                         {exp.entreprise && (
-                          <p className="text-[11px] text-indigo-600 font-semibold">{exp.entreprise}</p>
+                          <p className="text-[11px] text-[color:var(--ac)] font-semibold">{exp.entreprise}</p>
                         )}
                       </div>
                       {exp.periode && (

@@ -7,7 +7,7 @@ interface Props {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[10px] font-bold uppercase tracking-[0.18em] text-sky-700 bg-sky-50 border-l-4 border-sky-600 pl-2 py-0.5 mb-2.5">
+    <h2 className="text-[10px] font-bold uppercase tracking-[0.18em] text-[color:var(--ac-dark)] bg-[color:var(--ac-bg)] border-l-4 border-[color:var(--ac)] pl-2 py-0.5 mb-2.5">
       {children}
     </h2>
   );
@@ -22,13 +22,13 @@ export default function CompactTemplate({ data }: Props) {
       style={{ fontFamily: "'Inter', system-ui, sans-serif", minHeight: "842px" }}
     >
       {/* En-tête compact */}
-      <div className="flex items-end justify-between flex-wrap gap-2 border-b-4 border-sky-600 pb-3 mb-5">
+      <div className="flex items-end justify-between flex-wrap gap-2 border-b-4 border-[color:var(--ac)] pb-3 mb-5">
         <div className="flex items-center gap-4">
           {personal.photo && (
             <img
               src={personal.photo}
               alt=""
-              className="w-16 h-16 rounded-full object-cover border-2 border-sky-600 shrink-0"
+              className="w-16 h-16 rounded-full object-cover border-2 border-[color:var(--ac)] shrink-0"
             />
           )}
         <div>
@@ -36,7 +36,7 @@ export default function CompactTemplate({ data }: Props) {
             {personal.nom || "Votre Nom"}
           </h1>
           {personal.titre && (
-            <p className="text-[12px] text-sky-700 font-semibold">{personal.titre}</p>
+            <p className="text-[12px] text-[color:var(--ac-dark)] font-semibold">{personal.titre}</p>
           )}
         </div>
         </div>
@@ -68,7 +68,7 @@ export default function CompactTemplate({ data }: Props) {
                   <p className="text-[11.5px] font-bold text-gray-900">
                     {exp.poste}
                     {exp.entreprise && (
-                      <span className="font-semibold text-sky-700"> · {exp.entreprise}</span>
+                      <span className="font-semibold text-[color:var(--ac-dark)]"> · {exp.entreprise}</span>
                     )}
                   </p>
                   {exp.periode && (
@@ -115,7 +115,7 @@ export default function CompactTemplate({ data }: Props) {
                 .map((c) => (
                   <span
                     key={c.id}
-                    className="inline-block rounded bg-sky-50 text-sky-800 text-[9.5px] font-semibold px-2 py-0.5 border border-sky-200"
+                    className="inline-block rounded bg-[color:var(--ac-bg)] text-[color:var(--ac-dark)] text-[9.5px] font-semibold px-2 py-0.5 border border-[color:var(--ac-border)]"
                   >
                     {c.label}
                   </span>
@@ -132,7 +132,7 @@ export default function CompactTemplate({ data }: Props) {
               {langues.map((l) => (
                 <li key={l.id} className="text-[10.5px] text-gray-700 flex justify-between max-w-[200px]">
                   <span className="font-bold">{l.langue || "—"}</span>
-                  <span className="text-sky-700">{l.niveau || "—"}</span>
+                  <span className="text-[color:var(--ac-dark)]">{l.niveau || "—"}</span>
                 </li>
               ))}
             </ul>

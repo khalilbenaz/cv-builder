@@ -7,7 +7,7 @@ interface Props {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-800 border-b-2 border-gray-800 pb-1 mb-3">
+    <h2 className="text-[12px] font-bold uppercase tracking-[0.2em] text-gray-800 border-b-2 border-[color:var(--ac-dark)] pb-1 mb-3">
       {children}
     </h2>
   );
@@ -22,12 +22,12 @@ export default function ClassicTemplate({ data }: Props) {
       style={{ fontFamily: "Georgia, 'Times New Roman', serif", minHeight: "842px" }}
     >
       {/* En-tête centré */}
-      <div className="text-center border-b-2 border-gray-800 pb-5 mb-6">
+      <div className="text-center border-b-2 border-[color:var(--ac-dark)] pb-5 mb-6">
         {personal.photo && (
           <img
             src={personal.photo}
             alt=""
-            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-gray-800"
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-2 border-[color:var(--ac-dark)]"
           />
         )}
         <h1 className="text-3xl font-bold tracking-wide text-gray-900 uppercase">

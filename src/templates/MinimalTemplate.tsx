@@ -7,7 +7,7 @@ interface Props {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gray-400 mb-3">
+    <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[color:var(--ac)] mb-3">
       {children}
     </h2>
   );

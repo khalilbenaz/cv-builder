@@ -8,6 +8,8 @@ import ElegantTemplate from "./ElegantTemplate";
 import TechTemplate from "./TechTemplate";
 import CreativeTemplate from "./CreativeTemplate";
 import CompactTemplate from "./CompactTemplate";
+import ProTemplate from "./ProTemplate";
+import AtsTemplate from "./AtsTemplate";
 
 export type TemplateId =
   | "modern"
@@ -17,7 +19,9 @@ export type TemplateId =
   | "elegant"
   | "tech"
   | "creative"
-  | "compact";
+  | "compact"
+  | "pro"
+  | "ats";
 
 export interface TemplateMeta {
   id: TemplateId;
@@ -84,6 +88,20 @@ export const TEMPLATES: TemplateMeta[] = [
     description: "Dense, efficace, accent bleu",
     accent: "#0284c7",
     component: CompactTemplate,
+  },
+  {
+    id: "pro",
+    label: "Pro",
+    description: "Exécutif, bande colorée, dates en colonne",
+    accent: "#1d4ed8",
+    component: ProTemplate,
+  },
+  {
+    id: "ats",
+    label: "ATS",
+    description: "Noir & blanc, une colonne, optimisé parseurs",
+    accent: "#000000",
+    component: AtsTemplate,
   },
 ];
 
