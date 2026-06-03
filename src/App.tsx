@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { CVData } from "./types";
-import { loadCV, saveCV } from "./storage";
+import { loadCV, saveCV, loadTemplate, saveTemplate } from "./storage";
 import { defaultData } from "./defaultData";
+import type { TemplateId } from "./templates";
 import FormPanel from "./components/FormPanel";
 import CVPreview from "./components/CVPreview";
+import TemplatePicker from "./components/TemplatePicker";
 
 /* Injecte les styles d'impression une seule fois dans le <head> */
 const PRINT_STYLE = `
@@ -43,6 +45,7 @@ export default function App() {
   useInjectPrintStyle();
 
   const [data, setData] = useState<CVData>(() => loadCV());
+  const [template, setTemplate] = useState<TemplateId>(() => loadTemplate());
   const [saved, setSaved] = useState(false);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -58,6 +61,11 @@ export default function App() {
       if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     };
   }, [data]);
+
+  function handleTemplateChange(id: TemplateId) {
+    setTemplate(id);
+    saveTemplate(id);
+  }
 
   function handleReset() {
     if (window.confirm("Effacer toutes les données et repartir avec les données d'exemple ?")) {
@@ -127,12 +135,12 @@ export default function App() {
 
         {/* Aperçu */}
         <div className="sticky top-20">
-          <div className="bg-slate-50 border border-slate-100 rounded-t-2xl px-5 py-3 flex items-center justify-between shadow-sm">
-            <h2 className="text-sm font-semibold text-slate-700">Aperçu du CV</h2>
-            <span className="text-xs text-slate-400">Mis à jour en temps réel</span>
+          <div className="bg-slate-50 border border-slate-100 rounded-t-2xl px-5 py-3 flex items-center justify-between gap-3 flex-wrap shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-700 shrink-0">Aperçu du CV</h2>
+            <TemplatePicker value={template} onChange={handleTemplateChange} />
           </div>
           <div className="overflow-hidden rounded-b-2xl border border-t-0 border-slate-100 shadow-lg p-4 bg-white">
-            <CVPreview data={data} />
+            <CVPreview data={data} template={template} />
           </div>
         </div>
       </main>
